@@ -229,15 +229,14 @@ class Perceptron:
         self.optimize(training_dataset)
 
     def predict(self):
-        total_classifications = len(test_dataset) * len(test_dataset[0].results)
-        right_result = 0
+        total_classifications = len(test_dataset)
+        right_answers = 0
         for data in test_dataset:
             results = self.solve(data.inputs)
-            for result, expected_result in zip(results, data.results):
-                if result == expected_result:
-                    right_result += 1
+            if results == data.results:
+                right_answers += 1
 
-        print('Prediction accuracy: {:.2f}%'.format(right_result / total_classifications * 100))
+        print('Prediction accuracy: {:.2f}%'.format(right_answers / total_classifications * 100))
 
 
 def main():
